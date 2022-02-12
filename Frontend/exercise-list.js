@@ -14,7 +14,7 @@ const loadExercises = () => {
                         <h5 class="card-title">${exercise.name}</h5>
                         <h6 class="card-subtitle mb-2 text-muted" hidden>${exercise.uuid}</h6>
 
-                        <div>Description: ${exercise.description}</div>
+                        <div class="descrp">Description: ${exercise.description}</div>
                         <div>Main Muscle: ${exercise.category?.name}</div>
                         <div>Equpment: ${exercise.equipment[0]?.name}</div>
 
@@ -27,6 +27,7 @@ const loadExercises = () => {
                         </button>
                     </div>
                 </div>
+                </br>
             </div>
         `;
 
