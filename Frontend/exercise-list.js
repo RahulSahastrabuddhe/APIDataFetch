@@ -53,7 +53,7 @@ const loadExercises = () => {
 
                         <hr>
 
-                        <button type="button" class="btn btn-danger"  onClick="deleteExercise('c788d643-150a-4ac7-97ef-84643c6419bf')">Delete</button>
+                        <button type="button" class="btn btn-danger"  onClick="deleteExercise(${exercise.uuid})">Delete</button>
                         <button types="button" class="btn btn-primary" data-toggle="modal"
                             data-target="#editExerciseModal" onClick="setEditModal(${exercise.uuid})">
                             Edit
