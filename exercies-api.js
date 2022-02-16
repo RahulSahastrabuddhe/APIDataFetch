@@ -1,10 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
 const app = express();
+var request = require("request");
 const port = 3000;
-
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,22 +11,11 @@ app.use(bodyParser.json());
 
 let exercises = [];
 
-app.get("https://wger.de/api/v2/exerciseinfo/?format=json", (req, res) => {
-  res.json(exercises);
-});
-
-app.post("/exercise", (req, res) => {
-  const exercise = req.body;
-
-  // output the exercise to the console for debugging
-  console.log(exercise);
-  books.push(exercise);
-
-  res.send("exercise is added to the database");
-});
-
 app.get("/exercise", (req, res) => {
-  res.json(exercise);
+  console.log(exercises);
+  var url = "https://wger.de/api/v2/exerciseinfo/?format=json";
+  var temp = req.pipe(request(url)).pipe((exercises = res));
+  exercises = temp.result;
 });
 
 app.get("/exercise/:uuid", (req, res) => {
@@ -37,7 +25,7 @@ app.get("/exercise/:uuid", (req, res) => {
   // searching books for the uuid
   for (let exercise of exercises) {
     if (exercise.uuid === uuid) {
-      res.json(exercise);
+      res.json(exercise.results);
       return;
     }
   }
@@ -49,9 +37,10 @@ app.get("/exercise/:uuid", (req, res) => {
 app.delete("/exercise/:uuid", (req, res) => {
   // reading uuid from the URL
   const uuid = req.params.uuid;
-
+  console.log(uuid);
+  console.log(exercises);
   // remove item from the exercise array
-  exercise = exercise.filter((i) => {
+  exercise = exercises.filter((i) => {
     if (i.uuid !== uuid) {
       return true;
     }
